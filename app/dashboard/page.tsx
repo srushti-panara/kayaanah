@@ -1,9 +1,27 @@
+import Navbar from "../../components/layout/Navbar";
+import Footer from "../../components/home/Footer";
+
+import PatientOverview from "../../components/dashboard/PatientOverview";
+import DoctorOverview from "../../components/dashboard/DoctorOverview";
+
 export default function DashboardPage() {
   return (
-    <main className="min-h-screen bg-black p-10 text-white">
-      <h1 className="text-5xl font-bold">
-        Patient Dashboard
-      </h1>
-    </main>
+    <>
+      <Navbar />
+
+      <main className="min-h-screen bg-gradient-to-b from-slate-950 via-black to-slate-950 px-6 pt-32">
+
+        <div className="mx-auto max-w-7xl">
+
+          <PatientOverview />
+
+          <DoctorOverview />
+
+        </div>
+
+      </main>
+
+      <Footer />
+    </>
   );
 }

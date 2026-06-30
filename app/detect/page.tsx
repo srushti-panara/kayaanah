@@ -2,61 +2,127 @@
 
 import { useState } from "react";
 
+import Navbar from "../../components/layout/Navbar";
+import Footer from "../../components/home/Footer";
+
+import DiseaseSelector from "../../components/detect/DiseaseSelector";
+import UploadBox from "../../components/detect/UploadBox";
+import LoadingCard from "../../components/detect/LoadingCard";
+import ResultCard from "../../components/detect/ResultCard";
+
 export default function DetectPage() {
+  const [disease, setDisease] = useState("Psoriasis");
   const [image, setImage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [showResult, setShowResult] = useState(false);
 
-  const handleImage = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = e.target.files?.[0];
+  function analyze() {
+    setLoading(true);
 
-    if (!file) return;
-
-    setImage(URL.createObjectURL(file));
-  };
+    setTimeout(() => {
+      setLoading(false);
+      setShowResult(true);
+    }, 2500);
+  }
 
   return (
-    <main className="min-h-screen bg-black px-6 py-32 text-white">
-      <div className="mx-auto max-w-4xl">
+    <>
+      <Navbar />
 
-        <h1 className="mb-4 text-5xl font-bold">
-          AI Detection
-        </h1>
+      <main className="min-h-screen bg-gradient-to-b from-slate-950 via-black to-slate-950 pt-32 text-white">
 
-        <p className="mb-10 text-slate-400">
-          Upload a skin image and receive AI-powered analysis.
-        </p>
+        <div className="mx-auto max-w-6xl px-6">
 
-        <div className="rounded-3xl border border-slate-800 p-12">
+          {/* Hero */}
 
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImage}
-            className="mb-6"
-          />
+          <div className="text-center">
 
-          {image && (
-            <div className="space-y-6">
+            <p className="text-cyan-400 uppercase tracking-[0.3em] text-sm">
+              Kāyaanah AI
+            </p>
+
+            <h1 className="mt-6 text-6xl font-black">
+              Intelligent Skin Analysis
+            </h1>
+
+            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-400">
+              Upload a skin image and receive an AI-assisted prediction.
+              Today, Kāyaanah supports Psoriasis detection, with additional
+              skin conditions planned in future releases.
+            </p>
+
+          </div>
+
+          {/* Disease */}
+
+          <div className="mt-16">
+            <DiseaseSelector
+              value={disease}
+              onChange={setDisease}
+            />
+          </div>
+
+          {/* Upload */}
+
+          {!image && (
+            <UploadBox
+              onUpload={setImage}
+            />
+          )}
+
+          {/* Preview */}
+
+          {image && !loading && !showResult && (
+
+            <div className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-8">
+
+              <h2 className="mb-8 text-3xl font-bold">
+                Image Preview
+              </h2>
 
               <img
                 src={image}
                 alt="preview"
-                className="mx-auto max-h-96 rounded-2xl"
+                className="mx-auto max-h-[500px] rounded-3xl"
               />
 
-              <div className="text-center">
-                <button className="rounded-xl bg-sky-600 px-8 py-3 font-semibold hover:bg-sky-500">
+              <div className="mt-10 text-center">
+
+                <button
+                  onClick={analyze}
+                  className="rounded-2xl bg-cyan-500 px-8 py-4 text-lg font-semibold text-black transition hover:bg-cyan-400"
+                >
                   Analyze Image
                 </button>
+
               </div>
 
+            </div>
+
+          )}
+
+          {/* Loading */}
+
+          {loading && (
+            <div className="mt-10">
+              <LoadingCard />
+            </div>
+          )}
+
+          {/* Result */}
+
+          {showResult && (
+            <div className="mt-10">
+              <ResultCard />
             </div>
           )}
 
         </div>
 
-      </div>
-    </main>
+      </main>
+
+      <Footer />
+
+    </>
   );
 }
