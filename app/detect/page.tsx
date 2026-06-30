@@ -110,10 +110,19 @@ export default function DetectPage() {
           )}
 
           {/* Result */}
-
+          
           {showResult && (
             <div className="mt-10">
-              <ResultCard />
+              <ResultCard
+                prediction="Psoriasis"
+                confidence={98.2}
+                risk="High"
+                recommendation="The uploaded skin image shows characteristics commonly associated with psoriasis. Please consult a certified dermatologist for further clinical evaluation."
+                onReset={() => {
+                  setImage(null);
+                  setShowResult(false);
+                }}
+              />
             </div>
           )}
 

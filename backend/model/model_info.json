@@ -1,0 +1,20 @@
+{
+    "model_name": "K\u0101yaanah Vision",
+    "architecture": "EfficientNet-B4 + Transformer",
+    "image_size": [
+        224,
+        224
+    ],
+    "batch_size": 16,
+    "epochs": 20,
+    "classes": [
+        "Non-Psoriasis",
+        "Psoriasis"
+    ],
+    "metrics": {
+        "accuracy": 0.992,
+        "precision": 0.9918,
+        "recall": 0.9959,
+        "f1_score": 0.9938
+    }
+}

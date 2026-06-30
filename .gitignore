@@ -39,3 +39,34 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Node
+node_modules
+.next
+
+# Python
+backend/venv
+__pycache__
+*.pyc
+
+# Uploaded Images
+backend/uploads/*
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+
+# ==========================
+# AI Model Files
+# ==========================
+
+backend/model/saved_model/
+backend/model/saved_model.zip
+backend/model/psoriasis_model.keras
+backend/model/history.pkl
